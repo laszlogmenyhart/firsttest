@@ -53,11 +53,13 @@ var content = {
 		helyszin:"nagyterem",
 		lista:[
 			{
+				id:"111",
 				cim:"Elso eloadas cime",
 				eloado:"elso eloado",
 				idopont:"CS 12:00"
 			},
 			{
+				id:"121",
 				cim:"Masodik eloadas cime",
 				eloado:"masodik eloado",
 				idopont:"CS 12:30"
@@ -68,11 +70,13 @@ var content = {
 		helyszin:"kisterem1",
 		lista:[
 			{
+				id:"112",
 				cim:"Elso S1 eloadas cime",
 				eloado:"elso S1 eloado",
 				idopont:"CS 12:00"
 			},
 			{
+				id:"122",
 				cim:"Masodik S1 eloadas cime",
 				eloado:"masodik S1 eloado",
 				idopont:"CS 12:30"
@@ -83,11 +87,13 @@ var content = {
 		helyszin:"kisterem2",
 		lista:[
 			{
+				id:"113",
 				cim:"Elso S2 eloadas cime",
 				eloado:"elso S2 eloado",
 				idopont:"CS 12:00"
 			},
 			{
+				id:"123",
 				cim:"Masodik S2 eloadas cime",
 				eloado:"masodik S2 eloado",
 				idopont:"CS 12:30"
@@ -98,11 +104,13 @@ var content = {
 		helyszin:"kisterem3",
 		lista:[
 			{
+				id:"114",
 				cim:"Elso ID eloadas cime",
 				eloado:"elso ID eloado",
 				idopont:"CS 12:00"
 			},
 			{
+				id:"115",
 				cim:"Masodik ID eloadas cime",
 				eloado:"masodik ID eloado",
 				idopont:"CS 12:30"
@@ -164,21 +172,72 @@ var showItems = function() {
 	for (i=0;i<lista.length;i++) {
 		if ((i>=elsoElem) && (i<=elsoElem+db)) {
 			var elem="";
-			elem=elem+"<a href='#' onclick='"+fgv+"("+i+");'><div>";
+			elem=elem+"<div>";
+			elem=elem+"<div>";
 			elem=elem+lista[i].cim+"<br/>";
 			elem=elem+lista[i].eloado+"<br/>";
 			elem=elem+lista[i].idopont+"<br/>";
-			elem=elem+"</div></a>";
+			elem=elem+"</div>";
+			if (fgv=="erdekel") {
+				//eldontes tetel: benne van-e a listamban
+				var j=0;
+				while ((j<mylist.length) && (mylist[j].id!=lista[i].id)) {
+					j++;
+				}
+				if (j==mylist.length) {
+					elem=elem+"<a href='#' onclick='"+fgv+"("+i+");'>Érdekel</a>";
+				}
+			} else {
+				elem=elem+"<a href='#' onclick='megsemErdekel("+i+");'>Töröl</a>";
+				//eldontes tetel: ertekeltek listajaban benne van-e
+				var r=[];
+				if (window.localStorage.infoera2014_rate!==undefined) {
+					r=JSON.parse(window.localStorage.infoera2014_rate);
+				}
+				var j=0;
+				while ((j<r.length) && (r[j].id!=lista[i].id)) {
+					j++;
+				}
+				if (j==r.length) {
+					elem=elem+"<a href='#' onclick='"+fgv+"("+i+");'>Értékel</a>";
+				}
+			}
+			elem=elem+"</div>";
 			listaelemek=listaelemek+elem;
 		}
 	}
 	document.getElementById("listItems").innerHTML=listaelemek;
 };
 
+var megsemErdekel = function(i) {
+	//console.log("torolniAListabol-"+JSON.stringify(mylist[i].id));
+	var newmylist=[];
+	for (e in mylist) {
+		if (mylist[e].id!=mylist[i].id) {
+			newmylist.push(mylist[e]);
+		}
+	}
+	mylist=newmylist;
+	window.localStorage.infoera2014_mylist=JSON.stringify(mylist);
+	showList(listazva);
+};
+
 var erdekel = function(i) {
 	//console.log("erdekel-"+i);
-	mylist.push(lista[i]);
+	var newmylist=[];
+	var e=0;
+	while ((e<mylist.length) && (mylist[e].id<lista[i].id)) {
+		newmylist.push(mylist[e]);
+		e++;
+	};
+	newmylist.push(lista[i]);
+	while (e<mylist.length) {
+		newmylist.push(mylist[e]);
+		e++;
+	}
+	mylist=newmylist;
 	window.localStorage.infoera2014_mylist=JSON.stringify(mylist);
+	showList(listazva);
 };
 
 var showList = function(listaId) {
@@ -203,13 +262,25 @@ var showList = function(listaId) {
 
 var showRate = function(fromId) {
 	page=fromId;
+	var elem="";
 	if (page=="pageMain") {
+		elem=elem+"<div>konferenciát összességében.</div>";
 		document.getElementById("page_rate_button").innerHTML="Befejezés";
 		document.getElementById("pageMain").setAttribute('style', 'display:none;');
 	} else {
+		elem=elem+"<div>";
+		elem=elem+mylist[fromId].cim+"<br/>";
+		elem=elem+mylist[fromId].eloado+"<br/>";
+		elem=elem+mylist[fromId].idopont+"<br/>";
+		elem=elem+"előadást.";
+		elem=elem+"</div>";
 		document.getElementById("page_rate_button").innerHTML="Ment";
 		document.getElementById("pageList").setAttribute('style', 'display:none;');
 	}
+	document.getElementById("topicRate").value="1";
+	document.getElementById("performerRate").value="1";
+	document.getElementById("comment").value="";
+	document.getElementById("item").innerHTML=elem;
 	document.getElementById("pageRate").setAttribute('style', 'display:block;');
 };
 
@@ -224,24 +295,48 @@ var visszaRate = function () {
 
 var saveRate = function () {
 	document.getElementById("pageRate").setAttribute('style', 'display:none;');
+	var r=[];
+	if (window.localStorage.infoera2014_rate!==undefined) {
+		r=JSON.parse(window.localStorage.infoera2014_rate);
+	}
+	//console.log(r);
+	var e={};
 	if (page=="pageMain") {
-		//TODO: elmenteni a szerverre
+		e.id="infoera2014";
+		e.topicRate=document.getElementById("topicRate").value;
+		e.performerRate=document.getElementById("performerRate").value;
+		e.comment=document.getElementById("comment").value;
 		window.localStorage.infoera2014_closed="TRUE";
 		document.getElementById("page1").setAttribute('style', 'display:block;');
 		document.getElementById("varjukvissza").setAttribute('style', 'display:block;');
 	} else {
-		var r=[];
-		if (window.localStorage.infoera2014_rate!==undefined) {
-			r=JSON.parse(window.localStorage.infoera2014_rate);
-		}
-		//console.log(r);
-		e={};
+		e.id=mylist[page].id;
 		e.cim=mylist[page].cim;
 		e.eloado=mylist[page].eloado;
 		e.idopont=mylist[page].idopont;
-		r.push(e);
-		window.localStorage.infoera2014_rate=JSON.stringify(r);
+		e.topicRate=document.getElementById("topicRate").value;
+		e.performerRate=document.getElementById("performerRate").value;
+		e.comment=document.getElementById("comment").value;
 		document.getElementById("pageList").setAttribute('style', 'display:block;');
+	}
+	r.push(e);
+	window.localStorage.infoera2014_rate=JSON.stringify(r);
+	if (page!="pageMain") {
+		showList(listazva);
+	}
+	if (page=="pageMain") {
+		var rating="user="+window.localStorage.infoera2014_nickname+"&rate="+window.localStorage.infoera2014_rate;
+		console.log("AJAXcallTo -> http://157.181.166.134/infoera2014/saveRate.php?"+rating);
+		//TODO: elmenteni a szerverre
+		$.ajax({ 
+		url: 'http://157.181.166.134/infoera2014/saveRate.php',
+		type: "POST",
+		data: rating,
+		async: true,
+	  	success: function(response){
+			console.log("success");
+	  	}
+	})
 	}
 };
 
