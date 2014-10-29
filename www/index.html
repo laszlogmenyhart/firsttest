@@ -110,23 +110,25 @@
 			</a>
 			<div>Itt értékelheti a</div>
 			<div id="item"></div><br/>
-			Téma:
+			<table style="width:100%"><tr><td style="width:50%;text-align:right;">
+			Téma:</td><td style="text-align:left;">
 			<select name="topicRate" id="topicRate">
 				<option value="1">1</option>
 				<option value="2">2</option>
 				<option value="3">3</option>
 				<option value="4">4</option>
 				<option value="5">5</option>
-			</select><br/>
-			Előadó:
+			</select></td></tr>
+			<tr><td style="width:50%;text-align:right;">
+			Előadó:</td><td style="text-align:left;">
 			<select name="performerRate" id="performerRate">
 				<option value="1">1</option>
 				<option value="2">2</option>
 				<option value="3">3</option>
 				<option value="4">4</option>
 				<option value="5">5</option>
-			</select><br/>
-			<textarea name="comment" id="comment" style="height:30%;width:100%;"></textarea>
+			</select></td></tr></table>
+			<textarea name="comment" id="comment" rows="5" style="height:40%;width:100%;"></textarea>
 			<div class="ment"><a href="#" onclick="saveRate();">
 				<div id="page_rate_button">Ment</div>
 			</a></div>
