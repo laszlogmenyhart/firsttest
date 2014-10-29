@@ -309,7 +309,7 @@ var erdekel = function(i) {
 	showList(listazva);
 };
 
-var showList = function(listaId) {
+var showList = function(listaId, startItem) {
 	listazva=listaId;
 	lista=[];
 	if (listazva=="my") {
@@ -325,7 +325,9 @@ var showList = function(listaId) {
 			lista.push(e);
 		}
 	}
-	elsoElem=0;
+	if (startItem!==undefined) {
+		elsoElem=startItem;
+	}
 	showItems();
 	document.getElementById("listTitle").innerHTML="";
 	if (listazva=="my") {
