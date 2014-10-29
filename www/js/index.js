@@ -106,19 +106,19 @@ var content = {
 		helyszin:"kisterem1",
 		lista:[
 			{
-				id:"112",
+				id:"312",
 				cim:"Elso S1 eloadas cime",
 				eloado:"elso S1 eloado",
-				idopont:"CS 12:00"
+				idopont:"P 9:00"
 			},
 			{
-				id:"122",
+				id:"322",
 				cim:"Masodik S1 eloadas cime",
 				eloado:"masodik S1 eloado",
-				idopont:"CS 12:30"
+				idopont:"P 9:30"
 			},
 			{
-				id:"212",
+				id:"412",
 				cim:"Oktatási és vizsgáztatási segédletek okostelefonos alkalmazáson keresztül",
 				eloado:"Sárkány Rita, Németh Tamás",
 				idopont:"P 11:00"
@@ -129,16 +129,16 @@ var content = {
 		helyszin:"kisterem2",
 		lista:[
 			{
-				id:"113",
+				id:"413",
 				cim:"Elso S2 eloadas cime",
 				eloado:"elso S2 eloado",
-				idopont:"CS 12:00"
+				idopont:"P 11:00"
 			},
 			{
-				id:"123",
+				id:"423",
 				cim:"Masodik S2 eloadas cime",
 				eloado:"masodik S2 eloado",
-				idopont:"CS 12:30"
+				idopont:"P 11:30"
 			}
 		]
 	},
@@ -146,13 +146,13 @@ var content = {
 		helyszin:"kisterem3",
 		lista:[
 			{
-				id:"214",
+				id:"314",
 				cim:"Szoftverfejlesztés gyerekeknek, gyerekekkel",
 				eloado:"Dr. Lénárd András",
 				idopont:"P 9:00"
 			},
 			{
-				id:"224",
+				id:"324",
 				cim:"Mobil tanulás az alsó tagozaton",
 				eloado:"Vitéz Gyöngyvér",
 				idopont:"P 9:30"
@@ -163,19 +163,19 @@ var content = {
 		helyszin:"kisterem4",
 		lista:[
 			{
-				id:"115",
+				id:"215",
 				cim:"Informatikai kompetenciák: A valós világ modellezése",
 				eloado:"Szlávi Péter, Zsakó László",
 				idopont:"CS 16:30"
 			},
 			{
-				id:"125",
+				id:"225",
 				cim:"A magyar és a brit informatika kerettanterv 2012-es megújítása",
 				eloado:"Mahler Attila",
 				idopont:"CS 17:00"
 			},
 			{
-				id:"215",
+				id:"315",
 				cim:"Az összegzés ereje",
 				eloado:"Dr. Gregorics Tibor",
 				idopont:"P 9:00"
