@@ -47,22 +47,58 @@ var app = {
         console.log('Received Event: ' + id);
     }
 };
-
+//id:"BLOKK,sorsz,szekcio"
 var content = {
 	eloadasok:{
 		helyszin:"nagyterem",
 		lista:[
 			{
 				id:"111",
-				cim:"Elso eloadas cime",
-				eloado:"elso eloado",
-				idopont:"CS 12:00"
+				cim:"Az internetfüggőség két évtizede",
+				eloado:"Demetrovics Zsolt, ELTE",
+				idopont:"CS 14:10"
 			},
 			{
 				id:"121",
-				cim:"Masodik eloadas cime",
-				eloado:"masodik eloado",
-				idopont:"CS 12:30"
+				cim:"A drónok már a spájzban vannak",
+				eloado:"Geda Gábor",
+				idopont:"CS 15:00"
+			},
+			{
+				id:"131",
+				cim:"MESTER  online programozási feladatbank",
+				eloado:"Horváth Gyula",
+				idopont:"CS 15:45"
+			},
+			{
+				id:"211",
+				cim:"Információbiztonság",
+				eloado:"Zala Mihály",
+				idopont:"CS 16:20"
+			},
+			{
+				id:"221",
+				cim:"SULINET+ sávszélesség-emelés a közoktatásban",
+				eloado:"Stefán Péter",
+				idopont:"CS 17:00"
+			},
+			{
+				id:"231",
+				cim:"???",
+				eloado:"Dézsi János",
+				idopont:"CS 17:30"
+			},
+			{
+				id:"711",
+				cim:"???",
+				eloado:"Turcsányi-Szabó Márta",
+				idopont:"SZ 10:30"
+			},
+			{
+				id:"721",
+				cim:"Számítógépes gondolkodás: Hazai és európai körkép",
+				eloado:"Bíró Piroska - Csernoch Mária",
+				idopont:"SZ 11:00"
 			}
 		]
 	},
@@ -80,6 +116,12 @@ var content = {
 				cim:"Masodik S1 eloadas cime",
 				eloado:"masodik S1 eloado",
 				idopont:"CS 12:30"
+			},
+			{
+				id:"212",
+				cim:"Oktatási és vizsgáztatási segédletek okostelefonos alkalmazáson keresztül",
+				eloado:"Sárkány Rita, Németh Tamás",
+				idopont:"P 11:00"
 			}
 		]
 	},
@@ -100,20 +142,43 @@ var content = {
 			}
 		]
 	},
-	infodidact:{
+	szekcio3:{
 		helyszin:"kisterem3",
 		lista:[
 			{
-				id:"114",
-				cim:"Elso ID eloadas cime",
-				eloado:"elso ID eloado",
-				idopont:"CS 12:00"
+				id:"214",
+				cim:"Szoftverfejlesztés gyerekeknek, gyerekekkel",
+				eloado:"Dr. Lénárd András",
+				idopont:"P 9:00"
 			},
 			{
+				id:"224",
+				cim:"Mobil tanulás az alsó tagozaton",
+				eloado:"Vitéz Gyöngyvér",
+				idopont:"P 9:30"
+			}
+		]
+	},
+	infodidact:{
+		helyszin:"kisterem4",
+		lista:[
+			{
 				id:"115",
-				cim:"Masodik ID eloadas cime",
-				eloado:"masodik ID eloado",
-				idopont:"CS 12:30"
+				cim:"Informatikai kompetenciák: A valós világ modellezése",
+				eloado:"Szlávi Péter, Zsakó László",
+				idopont:"CS 16:30"
+			},
+			{
+				id:"125",
+				cim:"A magyar és a brit informatika kerettanterv 2012-es megújítása",
+				eloado:"Mahler Attila",
+				idopont:"CS 17:00"
+			},
+			{
+				id:"215",
+				cim:"Az összegzés ereje",
+				eloado:"Dr. Gregorics Tibor",
+				idopont:"P 9:00"
 			}
 		]
 	}
@@ -170,13 +235,13 @@ var showItems = function() {
 		fgv="showRate";		
 	}
 	for (i=0;i<lista.length;i++) {
-		if ((i>=elsoElem) && (i<=elsoElem+db)) {
+		if ((i>=elsoElem) && (i<elsoElem+db)) {
 			var elem="";
 			elem=elem+"<div class=\"item\">";
 			elem=elem+"<div>";
 			elem=elem+lista[i].cim+"<br/>";
 			elem=elem+lista[i].eloado+"<br/>";
-			elem=elem+lista[i].idopont+"<br/>";
+			elem=elem+lista[i].idopont+" "+lista[i].helyszin+"<br/>";
 			elem=elem+"</div>";
 			if (fgv=="erdekel") {
 				//eldontes tetel: benne van-e a listamban
@@ -255,14 +320,16 @@ var showList = function(listaId) {
 	} else {
 		for (i in content[listaId].lista) {
 			//console.log(content[listaId].lista[i]);
-			lista.push(content[listaId].lista[i]);
+			var e=content[listaId].lista[i];
+			e.helyszin=content[listaId].helyszin;
+			lista.push(e);
 		}
 	}
 	elsoElem=0;
 	showItems();
 	document.getElementById("listTitle").innerHTML="";
 	if (listazva=="my") {
-		document.getElementById("listTitle").innerHTML="Saját lista";
+		document.getElementById("listTitle").innerHTML="Amik érdekelnek";
 	} else if (listazva=="eloadasok") {
 		document.getElementById("listTitle").innerHTML="Előadások";
 	} else if (listazva=="szekcio1") {
@@ -283,7 +350,7 @@ var showRate = function(fromId) {
 	var elem="";
 	if (page=="pageMain") {
 		elem=elem+"<div>konferenciát összességében.</div>";
-		document.getElementById("page_rate_button").innerHTML="Befejezés";
+		document.getElementById("page_rate_button").innerHTML="A konferencia vége";
 		document.getElementById("pageMain").setAttribute('style', 'display:none;');
 	} else {
 		elem=elem+"<div class=\"item\"><div>";
@@ -344,8 +411,7 @@ var saveRate = function () {
 	}
 	if (page=="pageMain") {
 		var rating="user="+window.localStorage.infoera2014_nickname+"&rate="+window.localStorage.infoera2014_rate;
-		console.log("AJAXcallTo -> http://157.181.166.134/infoera2014/saveRate.php?"+rating);
-		//TODO: elmenteni a szerverre
+		//console.log("AJAXcallTo -> http://157.181.166.134/infoera2014/saveRate.php?"+rating);
 		$.ajax({ 
 		url: 'http://157.181.166.134/infoera2014/saveRate.php',
 		type: "POST",

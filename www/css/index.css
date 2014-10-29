@@ -109,6 +109,7 @@ a > div {
 
 .item > div {
 	text-align: left;
+	font-size: 22px;
 }
 
 .item > div + div {
