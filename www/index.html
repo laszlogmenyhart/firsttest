@@ -34,7 +34,10 @@
 		<script type="text/javascript" src="js/index.js"></script>
 		<div id="page1">
 			<a href="#" onclick="nextFrom('page1')">
-				<div class="app" id="pageStart">
+				<div class="app" id="pageStart"  style="background-color:#FDFDDE;">
+					<div>
+						<img src="img/infoera.png"/>
+					</div>
 					<div id="infoEra">
 						<div>Info</div>
 						<div>Éra</div>
@@ -59,44 +62,54 @@
 			</a>
 		</div>
 		<div class="app" id="pageMain">
+			<div>InfoÉra 2014</div>
+			<div style="display: -webkit-inline-box; width: 100%; margin-bottom:5%;">
+			<table style="width:100%;"><tr><td style="width:50%;">
 			<a href="#" onclick="showList('my');">
-				<div>Saját lista</div>
+				<div style="background-color:#FFE79B;">Saját lista</div>
 			</a>
+			</td><td>
 			<a href="#" onclick="showRate('pageMain');">
-				<div>Vége</div>
+				<div style="background-color:#FF0000;">Vége</div>
 			</a>
+			</td></tr></table>
+			</div>
 			<a href="#" onclick="showList('eloadasok');">
-				<div>Előadások</div>
+				<div style="background-color:#FEFE79;">Előadások</div>
 			</a>
 			<a href="#" onclick="showList('szekcio1');">
-				<div>Szekció 1</div>
+				<div>1. szekció</div>
 			</a>
 			<a href="#" onclick="showList('szekcio2');">
-				<div>Szekció 2</div>
+				<div>2. szekció</div>
+			</a>
+			<a href="#" onclick="showList('szekcio3');">
+				<div>3. szekció</div>
 			</a>
 			<a href="#" onclick="showList('infodidact');">
-				<div>INFODIDACT</div>
+				<div style="background-color:#FEFE79;">INFODIDACT</div>
 			</a>
 		</div>
 		<div class="app" id="pageList">
 			<a href="#" onclick="visszaList();">
-				<div>Vissza</div>
+				<div class="vissza">X</div>
 			</a>
+			<div id="listTitle"></div>
 			<a href="#" onclick="up();">
-				<div>Fel</div>
+				<div class="fel">Fel</div>
 			</a>
 			<div id="listItems">
 			</div>
 			<a href="#" onclick="down();">
-				<div>Le</div>
+				<div class="le">Le</div>
 			</a>
 		</div>
 		<div class="app" id="pageRate">
 			<a href="#" onclick="visszaRate();">
-				<div>Vissza</div>
+				<div class="vissza">X</div>
 			</a>
 			<div>Itt értékelheti a</div>
-			<div id="item"></div>
+			<div id="item"></div><br/>
 			Téma:
 			<select name="topicRate" id="topicRate">
 				<option value="1">1</option>
@@ -104,7 +117,7 @@
 				<option value="3">3</option>
 				<option value="4">4</option>
 				<option value="5">5</option>
-			</select>
+			</select><br/>
 			Előadó:
 			<select name="performerRate" id="performerRate">
 				<option value="1">1</option>
@@ -112,11 +125,11 @@
 				<option value="3">3</option>
 				<option value="4">4</option>
 				<option value="5">5</option>
-			</select>
+			</select><br/>
 			<textarea name="comment" id="comment" rows="5" cols="50"></textarea>
-			<a href="#" onclick="saveRate();">
+			<div class="ment"><a href="#" onclick="saveRate();">
 				<div id="page_rate_button">Ment</div>
-			</a>
+			</a></div>
 		</div>
 		<!--            <h1>PhoneGap</h1>
             <div id="deviceready" class="blink">

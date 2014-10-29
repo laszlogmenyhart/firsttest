@@ -167,12 +167,12 @@ var showItems = function() {
 	var listaelemek="";
 	var fgv="erdekel";
 	if (listazva=="my") {
-		fgv="showRate"
+		fgv="showRate";		
 	}
 	for (i=0;i<lista.length;i++) {
 		if ((i>=elsoElem) && (i<=elsoElem+db)) {
 			var elem="";
-			elem=elem+"<div>";
+			elem=elem+"<div class=\"item\">";
 			elem=elem+"<div>";
 			elem=elem+lista[i].cim+"<br/>";
 			elem=elem+lista[i].eloado+"<br/>";
@@ -185,10 +185,12 @@ var showItems = function() {
 					j++;
 				}
 				if (j==mylist.length) {
-					elem=elem+"<a href='#' onclick='"+fgv+"("+i+");'>Érdekel</a>";
+					elem=elem+"<div><a href='#' onclick='"+fgv+"("+i+");'>Érdekel</a></div>";
+				} else {
+					elem=elem+"<div>&nbsp;</div>";
 				}
 			} else {
-				elem=elem+"<a href='#' onclick='megsemErdekel("+i+");'>Töröl</a>";
+				elem=elem+"<div>";
 				//eldontes tetel: ertekeltek listajaban benne van-e
 				var r=[];
 				if (window.localStorage.infoera2014_rate!==undefined) {
@@ -199,8 +201,10 @@ var showItems = function() {
 					j++;
 				}
 				if (j==r.length) {
-					elem=elem+"<a href='#' onclick='"+fgv+"("+i+");'>Értékel</a>";
+					elem=elem+"<a href='#' onclick='"+fgv+"("+i+");'>Értékel</a>&nbsp;";
 				}
+				elem=elem+"<a href='#' onclick='megsemErdekel("+i+");'>Töröl</a>";
+				elem=elem+"</div>";
 			}
 			elem=elem+"</div>";
 			listaelemek=listaelemek+elem;
@@ -256,6 +260,20 @@ var showList = function(listaId) {
 	}
 	elsoElem=0;
 	showItems();
+	document.getElementById("listTitle").innerHTML="";
+	if (listazva=="my") {
+		document.getElementById("listTitle").innerHTML="Saját lista";
+	} else if (listazva=="eloadasok") {
+		document.getElementById("listTitle").innerHTML="Előadások";
+	} else if (listazva=="szekcio1") {
+		document.getElementById("listTitle").innerHTML="1. szekció";
+	} else if (listazva=="szekcio2") {
+		document.getElementById("listTitle").innerHTML="2. szekció";
+	} else if (listazva=="szekcio3") {
+		document.getElementById("listTitle").innerHTML="3. szekció";
+	} else if (listazva=="infodidact") {
+		document.getElementById("listTitle").innerHTML="INFODIDACT";
+	}
 	document.getElementById("pageMain").setAttribute('style', 'display:none;');
 	document.getElementById("pageList").setAttribute('style', 'display:block;');
 };
@@ -268,17 +286,17 @@ var showRate = function(fromId) {
 		document.getElementById("page_rate_button").innerHTML="Befejezés";
 		document.getElementById("pageMain").setAttribute('style', 'display:none;');
 	} else {
-		elem=elem+"<div>";
+		elem=elem+"<div class=\"item\"><div>";
 		elem=elem+mylist[fromId].cim+"<br/>";
 		elem=elem+mylist[fromId].eloado+"<br/>";
 		elem=elem+mylist[fromId].idopont+"<br/>";
 		elem=elem+"előadást.";
-		elem=elem+"</div>";
+		elem=elem+"</div></div>";
 		document.getElementById("page_rate_button").innerHTML="Ment";
 		document.getElementById("pageList").setAttribute('style', 'display:none;');
 	}
-	document.getElementById("topicRate").value="1";
-	document.getElementById("performerRate").value="1";
+	document.getElementById("topicRate").value="5";
+	document.getElementById("performerRate").value="5";
 	document.getElementById("comment").value="";
 	document.getElementById("item").innerHTML=elem;
 	document.getElementById("pageRate").setAttribute('style', 'display:block;');

@@ -24,17 +24,7 @@ body {
     -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
     -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
     -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
-    background-color:#E4E4E4;
-    background-image:linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
-    background-image:-webkit-linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
-    background-image:-ms-linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
-    background-image:-webkit-gradient(
-        linear,
-        left top,
-        left bottom,
-        color-stop(0, #A7A7A7),
-        color-stop(0.51, #E4E4E4)
-    );
+    background-color:#FDFDDE;
     background-attachment:fixed;
     font-family:'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
     font-size:12px;
@@ -77,6 +67,77 @@ h1 {
     overflow:visible;
     padding:0px;
     text-align:center;
+}
+
+a {
+	text-decoration: none;
+	color: #606060;
+}
+
+a > div {
+	background-color: #E0F0FF;
+	border-radius: 10px;
+	margin-bottom: 0%;
+	height: 10%;
+	padding-top: 5%;
+	padding-bottom: 0%;
+	margin-top: 5%;
+	font-weight:bold;
+}
+
+#pageStart {
+	padding-top: 5%;
+}
+
+#infoEra {
+	font-size:100px;
+	font-weight:bold;
+}
+
+.vissza {
+	background-color: red;
+	margin-top: 0px;
+	width: 10%;
+	padding-top: 1%;
+	height: 6%;
+	margin-left: 90%;
+}
+
+.item{
+	padding-top: 5%;
+}
+
+.item > div {
+	text-align: left;
+}
+
+.item > div + div {
+	text-align: right;
+}
+
+.ment {
+	position: absolute;
+	width: 100%;
+	bottom: 0;
+}
+
+.ment > a > div {
+	background-color: #FFE79B;
+	padding-top: 2%;
+	padding-bottom: 3%;
+}
+
+.fel {
+	padding-top: 2%;
+	height: 6%;
+}
+
+.le {
+	padding-top: 2%;
+	height: 6%;
+	bottom: 0px;
+	position: absolute;
+	width: 100%;
 }
 
 .event {
